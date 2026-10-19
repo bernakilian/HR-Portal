@@ -1,564 +1,270 @@
 <!DOCTYPE html>
 <html lang="af">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Babylonstoren HR Diensportaal</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Babylonstoren HR Diensportaal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#09196D;--paper:#F9FAFC;--stone:#776F67;--ink:#2b2b2b;--line:#dcdde3;--sage:#6b7d5c}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:300;background:var(--paper);color:var(--ink);line-height:1.7}
+h1,h2,h3,.num,.serif{font-family:"Cormorant Garamond",Baskerville,Georgia,serif;font-weight:500}
 
-        body {
-            font-family: 'Georgia', 'Garamond', serif;
-            background-color: #ffffff;
-            color: #2c2c2c;
-            line-height: 1.7;
-            letter-spacing: 0.3px;
-        }
+/* Hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;min-height:480px;background:var(--navy);color:#fff;overflow:hidden}
+.hero .in{padding:70px 56px 90px 8vw;align-self:center;position:relative}
+.hero .pic{background:url(ducks.jpg) center 68%/cover}
+.eyebrow{font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;opacity:.85}
+.hero h1{font-size:clamp(2.6rem,6vw,4.6rem);line-height:1.02;margin:18px 0;font-weight:400}
+.hero h1 em{font-style:italic;color:#f3d9a4}
+.wave{display:inline-block;transform-origin:70% 70%;animation:wave 2.4s ease-in-out infinite}
+@keyframes wave{0%,60%,100%{transform:rotate(0)}10%,30%{transform:rotate(16deg)}20%,40%{transform:rotate(-8deg)}50%{transform:rotate(10deg)}}
+.rule{width:56px;height:1px;background:#fff;opacity:.7;margin:0 0 20px}
+.hero p{font-size:1.1rem;opacity:.92;max-width:460px}
+.game{margin-top:26px;max-width:520px;position:relative;border-top:1px solid rgba(255,255,255,.18);cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.game canvas{display:block;width:100%;height:auto}
+.game small{display:block;margin-top:6px;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;opacity:.6}
+@media(prefers-reduced-motion:reduce){.wave{animation:none}}
 
-        /* Header Styles */
-        header {
-            background: #1e3a5f;
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+/* How it works */
+.steps{max-width:1100px;margin:-44px auto 0;position:relative;background:#fff;border:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(3,1fr);box-shadow:0 14px 40px rgba(9,25,109,.08)}
+.step{padding:28px 30px;display:flex;gap:18px;align-items:baseline}
+.step+.step{border-left:1px solid var(--line)}
+.step b{font-family:"Cormorant Garamond",serif;font-size:2rem;font-weight:400;color:var(--stone);font-style:italic}
+.step span{font-size:.95rem}
+.step strong{display:block;color:var(--navy);font-weight:500;letter-spacing:.04em}
 
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+/* Section head */
+.wrap{max-width:1100px;margin:0 auto;padding:80px 24px 40px}
+.head{text-align:center;margin-bottom:48px}
+.head h2{font-size:2.3rem;color:var(--navy);font-weight:400}
+.head .rule{background:var(--stone);margin:14px auto 0}
 
+/* Cards */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);padding:34px 32px 28px;
+  text-decoration:none;color:inherit;position:relative;transition:transform .35s,box-shadow .35s,border-color .35s}
+.card::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--navy);transition:width .4s}
+.card:hover,.card:focus-visible{transform:translateY(-5px);box-shadow:0 16px 36px rgba(9,25,109,.12);border-color:var(--navy);outline:none}
+.card:hover::after,.card:focus-visible::after{width:100%}
+.num{font-size:2.6rem;line-height:1;color:var(--stone);font-style:italic;font-weight:400}
+.card h3{font-size:1.55rem;line-height:1.2;color:var(--navy);margin:14px 0 18px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.card ul{list-style:none;flex-grow:1;font-size:.9rem;color:#5b5b5b}
+.card li{padding:3px 0;display:flex;gap:10px;align-items:baseline}
+.card li .e{flex:0 0 1.4em;text-align:center;font-size:1rem}
+.top{display:flex;justify-content:space-between;align-items:flex-start}
+.ico{font-size:2rem;line-height:1}
+.go{margin-top:24px;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--navy)}
+.go i{font-style:normal;display:inline-block;transition:transform .3s}
+.card:hover .go i{transform:translateX(6px)}
 
-        
+footer{margin-top:60px;background:var(--navy);color:#fff;text-align:center;padding:46px 24px}
+footer .serif{font-size:1.5rem;font-style:italic;font-weight:400}
+footer p{font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;opacity:.7;margin-top:8px}
 
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        .subheading {
-            font-size: 1.1em;
-            opacity: 0.95;
-            max-width: 600px;
-            margin: 0 auto;
-            font-weight: 300;
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 50px 20px;
-        }
-
-        /* Grid Layout */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        /* Category Card Styles */
-        .category-card {
-            background-color: #ffffff;
-            border: 2px solid #e8e8e8;
-            border-radius: 15px;
-            padding: 30px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .category-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #1e3a5f 0%, #2d5a3d 100%);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
-        }
-
-        .category-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .category-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(30, 58, 95, 0.15);
-            border-color: #1e3a5f;
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-        }
-
-        .category-card:active {
-            transform: translateY(-2px);
-        }
-
-        .card-number {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a3d 100%);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.1em;
-            margin-bottom: 15px;
-        }
-
-        .card-icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-        }
-
-        .card-title {
-            font-size: 1.3em;
-            font-weight: 700;
-            color: #1e3a5f;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-
-        .card-examples {
-            font-size: 0.9em;
-            color: #666;
-            line-height: 1.8;
-            flex-grow: 1;
-        }
-
-        .card-examples ul {
-            list-style: none;
-            margin-top: 10px;
-        }
-
-        .card-examples li {
-            padding: 4px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .card-examples li:before {
-            content: "•";
-            color: #2d5a3d;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        /* Info Section */
-        .info-section {
-            background-color: #f8f9fa;
-            border-left: 4px solid #1e3a5f;
-            padding: 30px;
-            border-radius: 10px;
-            margin-top: 40px;
-        }
-
-        .info-section h2 {
-            color: #1e3a5f;
-            font-size: 1.5em;
-            margin-bottom: 20px;
-        }
-
-        .info-section ol {
-            margin-left: 20px;
-            color: #555;
-        }
-
-        .info-section li {
-            margin-bottom: 12px;
-            line-height: 1.6;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #1e3a5f;
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 50px;
-        }
-
-        footer p {
-            opacity: 0.9;
-            font-size: 0.95em;
-        }
-
-        /* Tablet Responsiveness */
-        @media (max-width: 1024px) {
-            .categories-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-
-            .container {
-                padding: 40px 20px;
-            }
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .categories-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            header {
-                padding: 30px 20px;
-            }
-
-            h1 {
-                font-size: 1.8em;
-            }
-
-            .subheading {
-                font-size: 1em;
-            }
-
-            .logo {
-                width: 60px;
-                height: 60px;
-            }
-
-            .card-title {
-                font-size: 1.15em;
-            }
-
-            .card-examples {
-                font-size: 0.85em;
-            }
-
-            .category-card {
-                padding: 25px;
-            }
-
-            .info-section {
-                padding: 25px;
-            }
-
-            .info-section h2 {
-                font-size: 1.3em;
-            }
-        }
-
-        /* Mobile Phone Responsiveness */
-        @media (max-width: 480px) {
-            header {
-                padding: 25px 15px;
-            }
-
-            h1 {
-                font-size: 1.5em;
-            }
-
-            .subheading {
-                font-size: 0.95em;
-            }
-
-            .container {
-                padding: 30px 15px;
-            }
-
-            .categories-grid {
-                gap: 15px;
-            }
-
-            .category-card {
-                padding: 20px;
-            }
-
-            .card-icon {
-                font-size: 2em;
-                height: 40px;
-            }
-
-            .card-title {
-                font-size: 1.1em;
-            }
-
-            .info-section {
-                padding: 20px;
-                border-left: 3px solid #1e3a5f;
-            }
-        }
-
-        /* Accessibility */
-        .category-card:focus {
-            outline: 2px solid #1e3a5f;
-            outline-offset: 2px;
-        }
-
-        .category-card:focus-visible {
-            outline: 2px solid #1e3a5f;
-            outline-offset: 2px;
-        }
-    </style>
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){
+  .grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr;margin:-30px 16px 0}
+  .step+.step{border-left:0;border-top:1px solid var(--line)}
+  .hero{grid-template-columns:1fr;min-height:0}
+  .hero .in{padding:50px 24px 90px}
+  .hero .pic{order:-1;height:220px}
+  .wrap{padding-top:60px}
+}
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="header-content">
-            <div class="logo-container">
-                <div class="logo">
-  
-
-
-                </div>
-            </div>
-            <h1>WAARMEE KAN ONS HELP?</h1>
-            <p class="subheading">Kies die beste kategorie vir jou navraag sodat ons jou meer doeltreffend kan help.</p>
-        </div>
-    </header>
-
-            <!-- Info Section -->
-        <div class="info-section">
-            <h2>HOE DIT WERK</h2>
-            <ol>
-                <li><strong>Kies die kategorie</strong> wat die beste by jou behoefte pas.</li>
-                <li><strong>Voltooi die vorm</strong> met soveel besonderhede as moontlik.</li>
-                <li><strong>Ons help so gou as moontlik</strong></li>
-            </ol>
-        </div>
-
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Categories Grid -->
-        <div class="categories-grid">
-            <!-- Category 1 -->
-            <div class="category-card" onclick="openWrikeForm('https://www.wrike.com/forms/ABVMZKN67PQI3VIX/')">
-                <div class="card-number">1</div>
-                <div class="card-icon">📋</div>
-                <h3 class="card-title">Algemene HR Navrae & Kommunikasie</h3>
-                <div class="card-examples">
-                    <ul>
-                        <li>BT-Whatsapp groepie kommunikasie</li>
-                        <li>Algemene Vergadering Navrae</li>
-                        <li>Kantien TV Inligting</li>
-                        <li>Ou werknemer navrae</li>
-                        <li>Opdatering van persoonlike inligting</li>
-                        <li>Ander tipe HR versoeke</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Category 2 -->
-            <div class="category-card" onclick="openWrikeForm('https://www.wrike.com/forms/ABVMZKNSQIBZRYMW/')">
-                <div class="card-number">2</div>
-                <div class="card-icon">👥</div>
-                <h3 class="card-title">Werwing & Indiensneming</h3>
-                <div class="card-examples">
-                    <ul>
-                        <li>Werwing / Advertensie vir nuwe rol op Breezy</li>
-                        <li>Onderhoud bystand</li>
-                        <li>Wamly screening video</li>
-                        <li>Psigometriese Toets</li>
-                        <li>Kriminele check</li>
-                        <li>Vakansiewerk Skool Kinders</li>
-                        <li>Probasie Tydperk Ondersteuning</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Category 3 -->
-            <div class="category-card" onclick="openWrikeForm('https://www.wrike.com/forms/ABVMZKJODEYK5LZH/')">
-                <div class="card-number">3</div>
-                <div class="card-icon">📄</div>
-                <h3 class="card-title">Kontrakte, Dokumente & Verifikasies</h3>
-                <div class="card-examples">
-                    <ul>
-                        <li>Addendum tot kontrak</li>
-                        <li>Afskrif van dienskontrak</li>
-                        <li>Werk bevestiging brief</li>
-                        <li>Verblyf bevestiging brief</li>
-                        <li>VISA letters</li>
-                        <li>Kontrak navrae</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Category 4 -->
-            <div class="category-card" onclick="openWrikeForm('https://www.wrike.com/forms/ABVMZKPUY77PUZ5R/')">
-                <div class="card-number">4</div>
-                <div class="card-icon">💰</div>
-                <h3 class="card-title">Vergoeding, Voordele & Finansiële Bystand</h3>
-                <div class="card-examples">
-                    <ul>
-                        <li>Afskrif van payslip</li>
-                        <li>Momentum navrae</li>
-                        <li>Lenings</li>
-                        <li>Studie Betaling Ooreenkoms</li>
-                        <li>Borgskappe</li>
-                        <li>Decline van inkomende borgskap verwante</li>
-                        <li>Aftrekkings</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Category 5 -->
-            <div class="category-card" onclick="openWrikeForm('https://www.wrike.com/forms/ABVMZKMSONYDXG3P/')">
-                <div class="card-number">5</div>
-                <div class="card-icon">📊</div>
-                <h3 class="card-title">Verlof, Prestasie & Werknemerverhoudinge</h3>
-                <div class="card-examples">
-                    <ul>
-                        <li>Verlof navraag</li>
-                        <li>Prestasie Evaluasie</li>
-                        <li>Dissiplinêre Kwessies</li>
-                        <li>Ongeskikdheid</li>
-                        <li>Beleid navrae</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Category 6 -->
-            <div class="category-card" onclick="openWrikeForm('https://www.wrike.com/forms/ABVMZKI2H2NH4J4L/')">
-                <div class="card-number">6</div>
-                <div class="card-icon">❤️</div>
-                <h3 class="card-title">Welstand, Gesondheid & Veiligheid</h3>
-                <div class="card-examples">
-                    <ul>
-                        <li>Noodhulp tassie inhoud bestelling</li>
-                        <li>Werksbesering</li>
-                        <li>Tande afspraak</li>
-                        <li>Agrivision Bril navraag</li>
-                        <li>Staan Sterk Navraag</li>
-                        <li>Welstand Werf Navraag</li>
-                        <li>Swemlesse vir kinders</li>
-                        <li>Eksterne Welstand Event Navraag</li>
-                        <li>Smokenders program</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Category 7 -->
-            <div class="category-card" onclick="openWrikeForm('https://www.wrike.com/forms/ABVMZKLXSOWMVDYX/')">
-                <div class="card-number">7</div>
-                <div class="card-icon">🎓</div>
-                <h3 class="card-title">Opleiding & Ontwikkeling</h3>
-                <div class="card-examples">
-                    <ul>
-                        <li>Opleiding behoefte</li>
-                        <li>Hantering van Skills Training</li>
-                        <li>Interne Opleiding</li>
-                        <li>Oriëntering refresh</li>
-                        <li>Inspirasie sessie aanbieder voorstel</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Category 8 -->
-            <div class="category-card" onclick="openWrikeForm('https://www.wrike.com/forms/ABVMZKO4UDZMEY22/')">
-                <div class="card-number">8</div>
-                <div class="card-icon">🤝</div>
-                <h3 class="card-title">Werknemer Betrokkenheid & Kultuur</h3>
-                <div class="card-examples">
-                    <ul>
-                        <li>Spanbou Navraag</li>
-                        <li>Werknemer Erkenning</li>
-                        <li>Jaareindfunksies</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Category 9 -->
-            <div class="category-card" onclick="openWrikeForm('https://www.wrike.com/forms/ABVMZKOWZAZPK3FQ/')">
-                <div class="card-number">9</div>
-                <div class="card-icon">🏢</div>
-                <h3 class="card-title">Administrasie & Fasiliteite Ondersteuning</h3>
-                <div class="card-examples">
-                    <ul>
-                        <li>Waltons Navraag</li>
-                        <li>Admin kantoor item bestelling</li>
-                        <li>Verversings vir vergaderings</li>
-                        <li>Lokaal vir opleiding</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Category 10 -->
-            <div class="category-card" onclick="openWrikeForm('https://www.wrike.com/forms/ABVMZKOIKSDXVUYE/')">
-                <div class="card-number">10</div>
-                <div class="card-icon">⚖️</div>
-                <h3 class="card-title">Procare & Arbeidssake</h3>
-                <div class="card-examples">
-                    <ul>
-                        <li>Procare navraag</li>
-                        <li>Departement van Arbeid besoek</li>
-                    </ul>
-                </div>
-            </div>
-
-             <!-- Category 11 -->
-            <div class="category-card" onclick="openWrikeForm('https://www.wrike.com/forms/ABVMZKIFPWY5P4XE/')">
-                <div class="card-number">11</div>
-                <div class="card-icon">🌳</div>
-                <h3 class="card-title">Sister Estate Visit</h3>
-                <div class="card-examples">
-                    <ul>
-                        <li>Sister Estate Visits</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-
+<header class="hero">
+  <div class="in">
+    <div class="eyebrow">Hallo, Babylonstoren-span <span class="wave">👋</span></div>
+    <h1>Waarmee kan ons <em>help?</em></h1>
+    <div class="rule"></div>
+    <p>Kom ons help jou om jou eende in 'n ry te kry.</p>
+    <div class="game" id="game" aria-hidden="true">
+      <canvas id="c" width="600" height="130"></canvas>
+      <small>Druk spasie of tik om te spring</small>
     </div>
+  </div>
+  <div class="pic" role="img" aria-label="Eende stap oor die brug op Babylonstoren"></div>
+</header>
 
-    <!-- Footer -->
- 
+<section class="steps" aria-label="Hoe dit werk">
+  <div class="step"><b>i</b><span><strong>Kies die kategorie</strong>wat die beste by jou navraag pas.</span></div>
+  <div class="step"><b>ii</b><span><strong>Vul die vorm in</strong>met soveel besonderhede as moontlik.</span></div>
+  <div class="step"><b>iii</b><span><strong>Ons help jou</strong>so gou as moontlik.</span></div>
+</section>
 
-   <script>
-        function openWrikeForm(url) {
-            window.open(url, '_blank');
-        }
+<main class="wrap">
+  <div class="head"><h2>Kies waarmee ons kan help</h2><div class="rule"></div></div>
+  <div class="grid">
 
-        // Keyboard accessibility
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.category-card');
-            cards.forEach(card => {
-                card.setAttribute('role', 'button');
-                card.setAttribute('tabindex', '0');
-                card.addEventListener('keypress', function(event) {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        // Get the onclick attribute and extract the URL
-                        const onclickAttr = card.getAttribute('onclick');
-                        const urlMatch = onclickAttr.match(/'([^']+)'/);
-                        if (urlMatch) {
-                            openWrikeForm(urlMatch[1]);
-                        }
-                    }
-                });
-            });
-        });
-    </script>
+    <a class="card" href="https://www.wrike.com/forms/ABVMZKN67PQI3VIX/" target="_blank" rel="noopener">
+      <div class="top"><span class="num">01</span><span class="ico">📋</span></div>
+      <h3>Algemene HR Navrae &amp; Kommunikasie</h3>
+      <ul><li><span class="e">💬</span>BT-Whatsapp groepie kommunikasie</li><li><span class="e">🗓️</span>Algemene Vergadering Navrae</li><li><span class="e">📺</span>Kantien TV Inligting</li><li><span class="e">🧑‍🌾</span>Ou werknemer navrae</li><li><span class="e">✏️</span>Opdatering van persoonlike inligting</li><li><span class="e">🙋</span>Ander tipe HR versoeke</li></ul>
+      <span class="go">Maak die vorm oop <i>&rarr;</i></span>
+    </a>
+
+    <a class="card" href="https://www.wrike.com/forms/ABVMZKNSQIBZRYMW/" target="_blank" rel="noopener">
+      <div class="top"><span class="num">02</span><span class="ico">👥</span></div>
+      <h3>Werwing &amp; Indiensneming</h3>
+      <ul><li><span class="e">📣</span>Werwing / Advertensie vir nuwe rol op Breezy</li><li><span class="e">🪑</span>Onderhoud bystand</li><li><span class="e">🎥</span>Wamly screening video</li><li><span class="e">🧠</span>Psigometriese Toets</li><li><span class="e">🔍</span>Kriminele check</li><li><span class="e">🎒</span>Vakansiewerk Skool Kinders</li><li><span class="e">🌱</span>Probasie Tydperk Ondersteuning</li></ul>
+      <span class="go">Maak die vorm oop <i>&rarr;</i></span>
+    </a>
+
+    <a class="card" href="https://www.wrike.com/forms/ABVMZKJODEYK5LZH/" target="_blank" rel="noopener">
+      <div class="top"><span class="num">03</span><span class="ico">📄</span></div>
+      <h3>Kontrakte, Dokumente &amp; Verifikasies</h3>
+      <ul><li><span class="e">📎</span>Addendum tot kontrak</li><li><span class="e">📄</span>Afskrif van dienskontrak</li><li><span class="e">✉️</span>Werk bevestiging brief</li><li><span class="e">🏠</span>Verblyf bevestiging brief</li><li><span class="e">🛂</span>VISA letters</li><li><span class="e">❓</span>Kontrak navrae</li></ul>
+      <span class="go">Maak die vorm oop <i>&rarr;</i></span>
+    </a>
+
+    <a class="card" href="https://www.wrike.com/forms/ABVMZKPUY77PUZ5R/" target="_blank" rel="noopener">
+      <div class="top"><span class="num">04</span><span class="ico">💰</span></div>
+      <h3>Vergoeding, Voordele &amp; Finansiële Bystand</h3>
+      <ul><li><span class="e">🧾</span>Afskrif van payslip</li><li><span class="e">🛡️</span>Momentum navrae</li><li><span class="e">🏦</span>Lenings</li><li><span class="e">🎓</span>Studie Betaling Ooreenkoms</li><li><span class="e">🤲</span>Borgskappe</li><li><span class="e">🚫</span>Decline van inkomende borgskap verwante</li><li><span class="e">➖</span>Aftrekkings</li></ul>
+      <span class="go">Maak die vorm oop <i>&rarr;</i></span>
+    </a>
+
+    <a class="card" href="https://www.wrike.com/forms/ABVMZKMSONYDXG3P/" target="_blank" rel="noopener">
+      <div class="top"><span class="num">05</span><span class="ico">📊</span></div>
+      <h3>Verlof, Prestasie &amp; Werknemerverhoudinge</h3>
+      <ul><li><span class="e">🏖️</span>Verlof navraag</li><li><span class="e">⭐</span>Prestasie Evaluasie</li><li><span class="e">⚖️</span>Dissiplinêre Kwessies</li><li><span class="e">🩺</span>Ongeskikdheid</li><li><span class="e">📜</span>Beleid navrae</li></ul>
+      <span class="go">Maak die vorm oop <i>&rarr;</i></span>
+    </a>
+
+    <a class="card" href="https://www.wrike.com/forms/ABVMZKI2H2NH4J4L/" target="_blank" rel="noopener">
+      <div class="top"><span class="num">06</span><span class="ico">❤️</span></div>
+      <h3>Welstand, Gesondheid &amp; Veiligheid</h3>
+      <ul><li><span class="e">🧰</span>Noodhulp tassie inhoud bestelling</li><li><span class="e">🩹</span>Werksbesering</li><li><span class="e">🦷</span>Tande afspraak</li><li><span class="e">👓</span>Agrivision Bril navraag</li><li><span class="e">💪</span>Staan Sterk Navraag</li><li><span class="e">🌿</span>Welstand Werf Navraag</li><li><span class="e">🏊</span>Swemlesse vir kinders</li><li><span class="e">🧘</span>Eksterne Welstand Event Navraag</li><li><span class="e">🚭</span>Smokenders program</li></ul>
+      <span class="go">Maak die vorm oop <i>&rarr;</i></span>
+    </a>
+
+    <a class="card" href="https://www.wrike.com/forms/ABVMZKLXSOWMVDYX/" target="_blank" rel="noopener">
+      <div class="top"><span class="num">07</span><span class="ico">🎓</span></div>
+      <h3>Opleiding &amp; Ontwikkeling</h3>
+      <ul><li><span class="e">📚</span>Opleiding behoefte</li><li><span class="e">🛠️</span>Hantering van Skills Training</li><li><span class="e">🏫</span>Interne Opleiding</li><li><span class="e">🧭</span>Oriëntering refresh</li><li><span class="e">💡</span>Inspirasie sessie aanbieder voorstel</li></ul>
+      <span class="go">Maak die vorm oop <i>&rarr;</i></span>
+    </a>
+
+    <a class="card" href="https://www.wrike.com/forms/ABVMZKO4UDZMEY22/" target="_blank" rel="noopener">
+      <div class="top"><span class="num">08</span><span class="ico">🤝</span></div>
+      <h3>Werknemer Betrokkenheid &amp; Kultuur</h3>
+      <ul><li><span class="e">🧗</span>Spanbou Navraag</li><li><span class="e">🏆</span>Werknemer Erkenning</li><li><span class="e">🎉</span>Jaareindfunksies</li></ul>
+      <span class="go">Maak die vorm oop <i>&rarr;</i></span>
+    </a>
+
+    <a class="card" href="https://www.wrike.com/forms/ABVMZKOWZAZPK3FQ/" target="_blank" rel="noopener">
+      <div class="top"><span class="num">09</span><span class="ico">🏢</span></div>
+      <h3>Administrasie &amp; Fasiliteite Ondersteuning</h3>
+      <ul><li><span class="e">🖊️</span>Waltons Navraag</li><li><span class="e">🗂️</span>Admin kantoor item bestelling</li><li><span class="e">☕</span>Verversings vir vergaderings</li><li><span class="e">🚪</span>Lokaal vir opleiding</li></ul>
+      <span class="go">Maak die vorm oop <i>&rarr;</i></span>
+    </a>
+
+    <a class="card" href="https://www.wrike.com/forms/ABVMZKOIKSDXVUYE/" target="_blank" rel="noopener">
+      <div class="top"><span class="num">10</span><span class="ico">⚖️</span></div>
+      <h3>Procare &amp; Arbeidssake</h3>
+      <ul><li><span class="e">🩷</span>Procare navraag</li><li><span class="e">🏛️</span>Departement van Arbeid besoek</li></ul>
+      <span class="go">Maak die vorm oop <i>&rarr;</i></span>
+    </a>
+
+    <a class="card" href="https://www.wrike.com/forms/ABVMZKIFPWY5P4XE/" target="_blank" rel="noopener">
+      <div class="top"><span class="num">11</span><span class="ico">🌳</span></div>
+      <h3>Sister Estate Visit</h3>
+      <ul><li><span class="e">🌳</span>Sister Estate Visits</li></ul>
+      <span class="go">Maak die vorm oop <i>&rarr;</i></span>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  <div class="serif">Babylonstoren</div>
+  <p>HR Diensportaal</p>
+</footer>
+<script>
+/* Eend-spring speletjie (soos die Chrome-dinosaur) */
+(function(){
+  var cv=document.getElementById('c'),ctx=cv.getContext('2d'),box=document.getElementById('game');
+  var W=cv.width,H=cv.height,GROUND=H-22,G=3300,JUMP=-740,overAt=0;
+  var duck,obs,speed,score,best=0,state='idle',last=0,nextObs,dist;
+  var PICS=['🌻','🍇','🪵','🌿'];
+  try{best=+localStorage.getItem('duckBest')||0}catch(e){}
+
+  function reset(){duck={y:GROUND,vy:0,s:36};obs=[];speed=260;score=0;dist=0;nextObs=0.9}
+  function jump(){
+    if(state==='over'&&performance.now()-overAt<800)return; /* nie dadelik herbegin ná 'n botsing nie */
+    if(state==='idle'||state==='over'){reset();state='run';return}
+    if(duck.y>=GROUND-0.5)duck.vy=JUMP;
+  }
+  function inView(){var r=cv.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight}
+  document.addEventListener('keydown',function(e){
+    if(e.code==='Space'||e.code==='ArrowUp'){
+      if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;
+      if(state==='run'||inView()){e.preventDefault();if(!e.repeat)jump()}
+    }
+  });
+  box.addEventListener('pointerdown',function(e){e.preventDefault();jump()});
+
+  function emoji(ch,x,y,size,flip){
+    ctx.save();ctx.fillStyle='#fff';ctx.font=size+'px "Segoe UI Emoji","Apple Color Emoji",sans-serif';ctx.textBaseline='alphabetic';
+    if(flip){ctx.translate(x+size,y);ctx.scale(-1,1);ctx.fillText(ch,0,0)}else ctx.fillText(ch,x,y);
+    ctx.restore();
+  }
+  function update(dt){
+    duck.vy+=G*dt;duck.y+=duck.vy*dt;
+    if(duck.y>GROUND){duck.y=GROUND;duck.vy=0}
+    speed+=7*dt;dist+=speed*dt;score=Math.floor(dist/12);
+    nextObs-=dt;
+    if(nextObs<=0){
+      var big=Math.random()<.25;
+      obs.push({x:W+20,w:big?30:22,h:big?38:28,ch:PICS[Math.floor(Math.random()*PICS.length)],size:big?40:30});
+      nextObs=(0.75+Math.random()*0.9)*(300/speed)*1.6;
+    }
+    for(var i=obs.length-1;i>=0;i--){
+      var o=obs[i];o.x-=speed*dt;
+      if(o.x<-60){obs.splice(i,1);continue}
+      /* botsing: kleiner boks as die emoji */
+      var dx=70,dw=duck.s-12,dy=duck.y-duck.s+8;
+      if(dx+dw>o.x+6&&dx<o.x+o.w&&duck.y>GROUND-o.h+4){
+        state='over';overAt=performance.now();
+        if(score>best){best=score;try{localStorage.setItem('duckBest',best)}catch(e){}}
+      }
+    }
+  }
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    /* grond */
+    ctx.strokeStyle='rgba(255,255,255,.35)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(0,GROUND+4.5);ctx.lineTo(W,GROUND+4.5);ctx.stroke();
+    var off=state==='run'?(dist%24):0;
+    ctx.fillStyle='rgba(255,255,255,.25)';
+    for(var x=-off;x<W;x+=24)ctx.fillRect(x,GROUND+10,8,1);
+    /* hindernisse */
+    for(var i=0;i<obs.length;i++)emoji(obs[i].ch,obs[i].x-4,GROUND+2,obs[i].size,false);
+    /* eend — kyk na regs, wip as hy loop */
+    var bob=(state==='run'&&duck.y>=GROUND)?Math.abs(Math.sin(t/70))*3:0;
+    emoji('🦆',60,duck.y+2-bob,duck.s,true);
+    /* teks */
+    ctx.fillStyle='#fff';ctx.textAlign='right';ctx.font='500 18px "Cormorant Garamond",Georgia,serif';
+    ctx.fillText('Telling '+score+'   Beste '+best,W-6,22);
+    ctx.textAlign='center';
+    if(state==='idle'){ctx.font='italic 22px "Cormorant Garamond",Georgia,serif';ctx.fillText('Druk SPASIE om te begin',W/2,52)}
+    if(state==='over'&&performance.now()-overAt<800){ctx.font='italic 24px "Cormorant Garamond",Georgia,serif';ctx.fillText('Eina!',W/2,52)}
+    else if(state==='over'){ctx.font='italic 24px "Cormorant Garamond",Georgia,serif';ctx.fillText('Eina! Druk SPASIE om weer te probeer',W/2,52)}
+    ctx.textAlign='left';
+  }
+  function loop(t){
+    var dt=Math.min((t-last)/1000||0,0.05);last=t;
+    if(state==='run')update(dt);
+    draw(t);requestAnimationFrame(loop);
+  }
+  reset();requestAnimationFrame(loop);
+})();
+</script>
 </body>
 </html>
